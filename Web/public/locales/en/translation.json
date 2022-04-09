@@ -1,0 +1,6 @@
+{
+  "welcome": "Welcome to <1>React and react-i18next</1>",
+  "nameTitle": "This is your name",
+  "userMessagesUnread_one": "Hello <1>{{name}}</1>, you have {{count}} unread message. <5>Go to message</5>.",
+  "userMessagesUnread_other": "Hello <1>{{name}}</1>, you have {{count}} unread messages.  <5>Go to messages</5>."
+}

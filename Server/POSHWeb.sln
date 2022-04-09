@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "POSHWeb", "POSHWeb\POSHWeb.csproj", "{41C0DFAE-7E09-40F1-9615-420CD720EA17}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "POSHWeb.ScriptRunner", "POSHWeb.ScriptRunner\POSHWeb.ScriptRunner.csproj", "{C550F447-216A-41EC-ADFB-A2BF880E9518}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "POSHWebTests", "POSHWeb.Tests\POSHWebTests.csproj", "{D47CEE25-DEE6-4206-B12A-3E056BBB63DB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "POSHWeb.Testing.Playground", "POSHWeb.Testing.Playground\POSHWeb.Testing.Playground.csproj", "{C46B1592-C2B7-43C8-A2FF-167891BFE21C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{20C83546-CBD6-4A01-A9E0-9E13EECA4823} = {20C83546-CBD6-4A01-A9E0-9E13EECA4823}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "POSHWeb.Core", "POSHWeb.Core\POSHWeb.Core.csproj", "{20C83546-CBD6-4A01-A9E0-9E13EECA4823}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{41C0DFAE-7E09-40F1-9615-420CD720EA17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41C0DFAE-7E09-40F1-9615-420CD720EA17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41C0DFAE-7E09-40F1-9615-420CD720EA17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41C0DFAE-7E09-40F1-9615-420CD720EA17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C550F447-216A-41EC-ADFB-A2BF880E9518}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C550F447-216A-41EC-ADFB-A2BF880E9518}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C550F447-216A-41EC-ADFB-A2BF880E9518}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C550F447-216A-41EC-ADFB-A2BF880E9518}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D47CEE25-DEE6-4206-B12A-3E056BBB63DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D47CEE25-DEE6-4206-B12A-3E056BBB63DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D47CEE25-DEE6-4206-B12A-3E056BBB63DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D47CEE25-DEE6-4206-B12A-3E056BBB63DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C46B1592-C2B7-43C8-A2FF-167891BFE21C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C46B1592-C2B7-43C8-A2FF-167891BFE21C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C46B1592-C2B7-43C8-A2FF-167891BFE21C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C46B1592-C2B7-43C8-A2FF-167891BFE21C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20C83546-CBD6-4A01-A9E0-9E13EECA4823}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20C83546-CBD6-4A01-A9E0-9E13EECA4823}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20C83546-CBD6-4A01-A9E0-9E13EECA4823}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20C83546-CBD6-4A01-A9E0-9E13EECA4823}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5693D3B5-98D9-45D1-B0D9-9DC45D704C74}
+	EndGlobalSection
+EndGlobal
