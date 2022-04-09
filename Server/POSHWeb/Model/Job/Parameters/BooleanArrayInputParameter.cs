@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.VisualBasic.FileIO;
-using POSHWeb.Enum;
+﻿using POSHWeb.Enum;
 using POSHWeb.Model.Script;
 
 namespace POSHWeb.Model;
@@ -11,7 +9,8 @@ public class BooleanArrayInputParameter : InputParameter
     {
         Type = SupportedTypes.BooleanArray;
     }
-    public new bool[] PValue { get; set; }
+
+    public bool[] PValue { get; set; }
 
     public override void ParseValue(string value)
     {
@@ -22,6 +21,7 @@ public class BooleanArrayInputParameter : InputParameter
     {
         return options.Valid(PValue);
     }
+
     public override void AddToDictonary(Dictionary<string, object> dictionary)
     {
         dictionary.Add(Name, PValue);

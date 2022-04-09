@@ -10,7 +10,7 @@ public class BooleanInputParameter : InputParameter
         Type = SupportedTypes.Boolean;
     }
 
-    public new Boolean PValue { get; set; }
+    public bool PValue { get; set; }
 
     public override void ParseValue(string value)
     {
@@ -21,6 +21,7 @@ public class BooleanInputParameter : InputParameter
     {
         return options.Valid(PValue);
     }
+
     public override void AddToDictonary(Dictionary<string, object> dictionary)
     {
         dictionary.Add(Name, PValue);

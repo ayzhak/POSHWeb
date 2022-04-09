@@ -1,61 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace POSHWeb.ScriptRunner
+namespace POSHWeb.ScriptRunner;
+
+public sealed class QueuedHostedService : BackgroundService
 {
-    public sealed class QueuedHostedService : BackgroundService
+    private readonly ILogger<QueuedHostedService> _logger;
+    private readonly IBackgroundTaskQueue _taskQueue;
+
+    public QueuedHostedService(
+        IBackgroundTaskQueue taskQueue,
+        ILogger<QueuedHostedService> logger)
     {
-        private readonly IBackgroundTaskQueue _taskQueue;
-        private readonly ILogger<QueuedHostedService> _logger;
+        (_taskQueue, _logger) = (taskQueue, logger);
+    }
 
-        public QueuedHostedService(
-            IBackgroundTaskQueue taskQueue,
-            ILogger<QueuedHostedService> logger) =>
-            (_taskQueue, _logger) = (taskQueue, logger);
+    protected override Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        _logger.LogInformation(
+            $"{nameof(QueuedHostedService)} is running.{Environment.NewLine}" +
+            $"{Environment.NewLine}Tap W to add a work item to the " +
+            $"background queue.{Environment.NewLine}");
 
-        protected override Task ExecuteAsync(CancellationToken stoppingToken)
-        {
-            _logger.LogInformation(
-                $"{nameof(QueuedHostedService)} is running.{Environment.NewLine}" +
-                $"{Environment.NewLine}Tap W to add a work item to the " +
-                $"background queue.{Environment.NewLine}");
+        return ProcessTaskQueueAsync(stoppingToken);
+    }
 
-            return ProcessTaskQueueAsync(stoppingToken);
-        }
-
-        private async Task ProcessTaskQueueAsync(CancellationToken stoppingToken)
-        {
-            while (!stoppingToken.IsCancellationRequested)
+    private async Task ProcessTaskQueueAsync(CancellationToken stoppingToken)
+    {
+        while (!stoppingToken.IsCancellationRequested)
+            try
             {
-                try
-                {
-                    Func<CancellationToken, ValueTask>? workItem =
-                        await _taskQueue.DequeueAsync(stoppingToken);
+                var workItem =
+                    await _taskQueue.DequeueAsync(stoppingToken);
 
-                    await workItem(stoppingToken);
-                }
-                catch (OperationCanceledException)
-                {
-                    // Prevent throwing if stoppingToken was signaled
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex, "Error occurred executing task work item.");
-                }
+                await workItem(stoppingToken);
             }
-        }
+            catch (OperationCanceledException)
+            {
+                // Prevent throwing if stoppingToken was signaled
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred executing task work item.");
+            }
+    }
 
-        public override async Task StopAsync(CancellationToken stoppingToken)
-        {
-            _logger.LogInformation(
-                $"{nameof(QueuedHostedService)} is stopping.");
+    public override async Task StopAsync(CancellationToken stoppingToken)
+    {
+        _logger.LogInformation(
+            $"{nameof(QueuedHostedService)} is stopping.");
 
-            await base.StopAsync(stoppingToken);
-        }
+        await base.StopAsync(stoppingToken);
     }
 }

@@ -1,6 +1,5 @@
-﻿namespace POSHWeb.Exceptions
+﻿namespace POSHWeb.Exceptions;
+
+public class InvalidFileExtensionException : Exception
 {
-    public class InvalidFileExtensionException: Exception
-    {
-    }
 }

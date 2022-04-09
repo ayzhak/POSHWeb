@@ -9,7 +9,9 @@ public class StringInputParameter : InputParameter
     {
         Type = SupportedTypes.String;
     }
-    public new string PValue { get; set; }
+
+    public string PValue { get; set; }
+
     public override void ParseValue(string value)
     {
         PValue = value;

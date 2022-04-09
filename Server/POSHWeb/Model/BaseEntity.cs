@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel;
 
-namespace POSHWeb.Model
+namespace POSHWeb.Model;
+
+public abstract class BaseEntity
 {
-    public abstract class BaseEntity
-    {
-        [ReadOnly(true)]
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
-    }
+    [ReadOnly(true)] public DateTime? CreatedAt { get; set; }
+
+    public DateTime? UpdatedAt { get; set; }
 }

@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualBasic.FileIO;
-using POSHWeb.Enum;
+﻿using POSHWeb.Enum;
 using POSHWeb.Model.Script;
 
 namespace POSHWeb.Model;
@@ -10,7 +9,9 @@ public class DoubleArrayInputParameter : InputParameter
     {
         Type = SupportedTypes.DoubleArray;
     }
-    public new double[] PValue { get; set; }
+
+    public double[] PValue { get; set; }
+
     public override void ParseValue(string value)
     {
         PValue = ParseArrayValue<double>(value);
@@ -20,6 +21,7 @@ public class DoubleArrayInputParameter : InputParameter
     {
         return options.Valid(PValue);
     }
+
     public override void AddToDictonary(Dictionary<string, object> dictionary)
     {
         dictionary.Add(Name, PValue);

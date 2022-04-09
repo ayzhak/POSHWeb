@@ -11,7 +11,6 @@ public class MockDBContext
 {
     public static Mock<IServiceScopeFactory> CreateMockIServiceScopeFactoryForDB(out DatabaseContext dbContext)
     {
-
         dbContext = CreateContext();
         var serviceProvider = new Mock<IServiceProvider>();
         serviceProvider.Setup<object>(x => x.GetService(typeof(DatabaseContext))).Returns(dbContext);
@@ -26,6 +25,7 @@ public class MockDBContext
 
         return serviceScopeFactory;
     }
+
     private static DatabaseContext CreateContext()
     {
         var _connection = new SqliteConnection("Filename=:memory:");

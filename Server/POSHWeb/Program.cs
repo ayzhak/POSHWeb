@@ -3,10 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using POSHWeb.Client.Web.Core.Extensions;
 using POSHWeb.Data;
 using POSHWeb.Options;
-using POSHWeb.ScriptRunner;
 using POSHWeb.ScriptRunner.Extensions;
 using POSHWeb.Services;
-using Serilog;
 using SignalRChat.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +14,6 @@ builder.Services.AddControllers();
 // SignalR Setup
 builder.Services.AddSignalR();
 builder.Services.AddTransient<ScriptHub>();
-
 
 
 // Custom

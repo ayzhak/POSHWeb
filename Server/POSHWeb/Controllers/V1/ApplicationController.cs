@@ -1,6 +1,4 @@
-﻿using System.Configuration;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace POSHWeb.Controllers.V1;
@@ -21,7 +19,7 @@ public class ApplicationController : ControllerBase
     {
         return new ApplicationSettings();
     }
-} 
+}
 
 public class ApplicationSettings
 {

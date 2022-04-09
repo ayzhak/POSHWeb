@@ -35,6 +35,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\POSHWeb.Client.Web.Core\POSHWeb.Core.csproj" />
+    <ProjectReference Include="..\POSHWeb.Core\POSHWeb.Core.csproj" />
     <ProjectReference Include="..\POSHWeb.ScriptRunner\POSHWeb.ScriptRunner.csproj" />
   </ItemGroup>
 

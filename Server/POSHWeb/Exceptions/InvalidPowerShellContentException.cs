@@ -1,6 +1,5 @@
-﻿namespace POSHWeb.Exceptions
+﻿namespace POSHWeb.Exceptions;
+
+public class InvalidPowerShellContentException : Exception
 {
-    public class InvalidPowerShellContentException : Exception
-    {
-    }
 }

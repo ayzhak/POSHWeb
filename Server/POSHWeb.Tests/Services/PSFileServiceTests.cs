@@ -1,140 +1,133 @@
-﻿using Xunit;
-using POSHWeb.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Abstractions;
-using Moq;
-using NuGet.ContentModel;
 using POSHWeb.Data;
 using POSHWeb.Model;
 using POSHWebTests.Mocks;
+using Xunit;
 
-namespace POSHWeb.Services.Tests
+namespace POSHWeb.Services.Tests;
+
+public class PSFileServiceTests
 {
-    public class PSFileServiceTests
+    [Fact]
+    public void Create_CreateValidFile_Valid()
     {
-        [Fact()]
-        public void Create_CreateValidFile_Valid()
+        var fullPath = GeneratePSFile("Write-Host 'Test'");
+        var psfileService = FactoryPSFileService(out var dbContext);
+        psfileService.Create(fullPath);
+
+        var scripts = dbContext.Script.ToList();
+        Assert.Equal(scripts.Count, 1);
+        var script = scripts[0];
+        Assert.Equal(Path.GetFileName(fullPath), script.FileName);
+        Assert.Equal(fullPath, script.FullPath);
+        Assert.Equal("Write-Host 'Test'", script.Content);
+        Assert.Equal("fe8aca7ccf892ab45f1956f5cacc628d98cb54aa601acc467aedd3f128a070d2", script.ContentHash);
+        File.Delete(fullPath);
+        dbContext.Dispose();
+    }
+
+    [Fact]
+    public void Remove_ValidRemove_DatabaseShouldBeEmpty()
+    {
+        var psfileService = FactoryPSFileService(out var dbContext);
+        var fullPath = GeneratePSFile("Write-Host 'Test'");
+
+        dbContext.Script.Add(new PSScript
         {
-            var fullPath = GeneratePSFile("Write-Host 'Test'");
-            var psfileService = FactoryPSFileService(out var dbContext);
-            psfileService.Create(fullPath);
+            FullPath = fullPath,
+            FileName = Path.GetFileName(fullPath),
+            Content = "Write-Host 'Test'",
+            ContentHash = "fe8aca7ccf892ab45f1956f5cacc628d98cb54aa601acc467aedd3f128a070d2"
+        });
 
-            var scripts = dbContext.Script.ToList();
-            Assert.Equal(scripts.Count, 1);
-            var script = scripts[0];
-            Assert.Equal(Path.GetFileName(fullPath), script.FileName);
-            Assert.Equal(fullPath, script.FullPath);
-            Assert.Equal("Write-Host 'Test'", script.Content);
-            Assert.Equal("fe8aca7ccf892ab45f1956f5cacc628d98cb54aa601acc467aedd3f128a070d2", script.ContentHash);
-            File.Delete(fullPath);
-            dbContext.Dispose();
-        }
+        dbContext.SaveChanges();
+        File.Delete(fullPath);
+        psfileService.Remove(fullPath);
+        Assert.Empty(dbContext.Script.ToList());
 
-        [Fact()]
-        public void Remove_ValidRemove_DatabaseShouldBeEmpty()
+        dbContext.Dispose();
+    }
+
+    [Fact]
+    public void Modified_ContentChange_ContentInDatabaseChanged()
+    {
+        var psfileService = FactoryPSFileService(out var dbContext);
+        var fullPath = GeneratePSFile("Write-Host 'Test'");
+        dbContext.Script.Add(new PSScript
         {
-            var psfileService = FactoryPSFileService(out var dbContext);
-            var fullPath = GeneratePSFile("Write-Host 'Test'");
+            FullPath = fullPath,
+            FileName = Path.GetFileName(fullPath),
+            Content = "Write-Host 'Test'",
+            ContentHash = "fe8aca7ccf892ab45f1956f5cacc628d98cb54aa601acc467aedd3f128a070d2",
+            Parameters = new List<PSParameter>()
+        });
+        dbContext.SaveChanges();
+        File.WriteAllText(fullPath, "Write-Host 'TEST'");
+        psfileService.Modified(fullPath);
 
-            dbContext.Script.Add(new PSScript
-            {
-                FullPath = fullPath,
-                FileName = Path.GetFileName(fullPath),
-                Content = "Write-Host 'Test'",
-                ContentHash = "fe8aca7ccf892ab45f1956f5cacc628d98cb54aa601acc467aedd3f128a070d2"
-            });
+        var scripts = dbContext.Script.ToList();
+        Assert.Equal(scripts.Count, 1);
+        var script = scripts[0];
+        Assert.Equal(Path.GetFileName(fullPath), script.FileName);
+        Assert.Equal(fullPath, script.FullPath);
+        Assert.Equal("Write-Host 'TEST'", script.Content);
+        Assert.Equal("c1257f0f1f00a0f8621769785e7db7f5cedfb90649928c5cbedc957ecd670c59", script.ContentHash);
 
-            dbContext.SaveChanges();
-            File.Delete(fullPath);
-            psfileService.Remove(fullPath);
-            Assert.Empty(dbContext.Script.ToList());
+        File.Delete(fullPath);
+        dbContext.Dispose();
+    }
 
-            dbContext.Dispose();
-        }
-
-        [Fact()]
-        public void Modified_ContentChange_ContentInDatabaseChanged()
+    [Fact]
+    public void Rename_RenameFile_OnlyFilenameChangedInDatabase()
+    {
+        var psfileService = FactoryPSFileService(out var dbContext);
+        var oldPathFile = GeneratePSFile("Write-Host 'Test'");
+        var newPathFile = GeneratePSFile("Write-Host 'Test'");
+        dbContext.Script.Add(new PSScript
         {
-            var psfileService = FactoryPSFileService(out var dbContext);
-            var fullPath = GeneratePSFile("Write-Host 'Test'");
-            dbContext.Script.Add(new PSScript
-            {
-                FullPath = fullPath,
-                FileName = Path.GetFileName(fullPath),
-                Content = "Write-Host 'Test'",
-                ContentHash = "fe8aca7ccf892ab45f1956f5cacc628d98cb54aa601acc467aedd3f128a070d2",
-                Parameters = new List<PSParameter>()
-            });
-            dbContext.SaveChanges();
-            File.WriteAllText(fullPath, "Write-Host 'TEST'");
-            psfileService.Modified(fullPath);
+            FullPath = oldPathFile,
+            FileName = Path.GetFileName(oldPathFile),
+            Content = "Write-Host 'Test'",
+            ContentHash = "fe8aca7ccf892ab45f1956f5cacc628d98cb54aa601acc467aedd3f128a070d2"
+        });
+        dbContext.SaveChanges();
+        File.Delete(oldPathFile);
+        psfileService.Rename(oldPathFile, newPathFile);
 
-            var scripts = dbContext.Script.ToList();
-            Assert.Equal(scripts.Count, 1);
-            var script = scripts[0];
-            Assert.Equal(Path.GetFileName(fullPath), script.FileName);
-            Assert.Equal(fullPath, script.FullPath);
-            Assert.Equal("Write-Host 'TEST'", script.Content);
-            Assert.Equal("c1257f0f1f00a0f8621769785e7db7f5cedfb90649928c5cbedc957ecd670c59", script.ContentHash);
+        var scripts = dbContext.Script.ToList();
+        Assert.Equal(scripts.Count, 1);
+        var script = scripts[0];
+        Assert.Equal(newPathFile, script.FullPath);
+        Assert.Equal(Path.GetFileName(newPathFile), script.FileName);
+        Assert.Equal("Write-Host 'Test'", script.Content);
+        Assert.Equal("fe8aca7ccf892ab45f1956f5cacc628d98cb54aa601acc467aedd3f128a070d2", script.ContentHash);
 
-            File.Delete(fullPath);
-            dbContext.Dispose();
-        }
+        File.Delete(newPathFile);
+        dbContext.Dispose();
+    }
 
-        [Fact()]
-        public void Rename_RenameFile_OnlyFilenameChangedInDatabase()
-        {
-            var psfileService = FactoryPSFileService(out var dbContext);
-            var oldPathFile = GeneratePSFile("Write-Host 'Test'");
-            var newPathFile = GeneratePSFile("Write-Host 'Test'");
-            dbContext.Script.Add(new PSScript
-            {
-                FullPath = oldPathFile,
-                FileName = Path.GetFileName(oldPathFile),
-                Content = "Write-Host 'Test'",
-                ContentHash = "fe8aca7ccf892ab45f1956f5cacc628d98cb54aa601acc467aedd3f128a070d2"
-            });
-            dbContext.SaveChanges();
-            File.Delete(oldPathFile);
-            psfileService.Rename(oldPathFile, newPathFile);
+    private string GeneratePSFile(string content)
+    {
+        var filePath = Path.GetTempPath() + Guid.NewGuid() + ".ps1";
+        File.WriteAllText(filePath, content);
+        return filePath;
+    }
 
-            var scripts = dbContext.Script.ToList();
-            Assert.Equal(scripts.Count, 1);
-            var script = scripts[0];
-            Assert.Equal(newPathFile, script.FullPath);
-            Assert.Equal(Path.GetFileName(newPathFile), script.FileName);
-            Assert.Equal("Write-Host 'Test'", script.Content);
-            Assert.Equal("fe8aca7ccf892ab45f1956f5cacc628d98cb54aa601acc467aedd3f128a070d2", script.ContentHash);
+    private static PSFileService FactoryPSFileService(out DatabaseContext dbContext)
+    {
+        var servicesMock = MockDBContext.CreateMockIServiceScopeFactoryForDB(out var context);
+        dbContext = context;
 
-            File.Delete(newPathFile);
-            dbContext.Dispose();
-        }
-
-        private string GeneratePSFile(string content)
-        {
-            string filePath = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".ps1";
-            File.WriteAllText(filePath, content);
-            return filePath;
-        }
-
-        private static PSFileService FactoryPSFileService(out DatabaseContext dbContext)
-        {
-            var servicesMock = MockDBContext.CreateMockIServiceScopeFactoryForDB(out var context);
-            dbContext = context;
-
-            var psfileService = new PSFileService(
-                servicesMock.Object,
-                new HasherService(),
-                new NullLogger<PSFileService>(),
-                new PSScriptValidator(new NullLogger<PSScriptValidator>()),
-                new PSParameterParserService());
-            return psfileService;
-        }
+        var psfileService = new PSFileService(
+            servicesMock.Object,
+            new HasherService(),
+            new NullLogger<PSFileService>(),
+            new PSScriptValidator(new NullLogger<PSScriptValidator>()),
+            new PSParameterParserService());
+        return psfileService;
     }
 }

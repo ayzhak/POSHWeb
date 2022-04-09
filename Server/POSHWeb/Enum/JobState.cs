@@ -1,9 +1,10 @@
 ﻿namespace POSHWeb.Enum;
 
 /// <summary>
-/// This are the States of a execution job
+///     This are the States of a execution job
 /// </summary>
-public enum JobState{
+public enum JobState
+{
     Created,
     Running,
     Finished,

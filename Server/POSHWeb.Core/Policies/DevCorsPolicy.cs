@@ -4,8 +4,8 @@ namespace POSHWeb.Core.Policies;
 
 public class DevCorsPolicy : ICorsPolicy
 {
-
     public string Name { get; } = "DevCorsPolicy";
+
     public void Apply(CorsPolicyBuilder builder)
     {
         builder

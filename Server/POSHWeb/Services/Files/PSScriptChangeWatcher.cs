@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Options;
 using POSHWeb.Exceptions;
-using POSHWeb.Model;
 using POSHWeb.Options;
 using SignalRChat.Hubs;
 
@@ -9,17 +8,17 @@ namespace POSHWeb.Services
 {
     public class PSScriptChangeWatcher : IHostedService, IDisposable
     {
-        private readonly PSFileService _psFileService;
-        private readonly IHubContext<ScriptHub, IScriptHub> _scriptHub;
         private readonly ILogger<PSScriptChangeWatcher> _logger;
         private readonly POSHWebOptions _options;
+        private readonly PSFileService _psFileService;
+        private readonly IHubContext<ScriptHub, IScriptHub> _scriptHub;
+        private readonly DirectoryInfo directory;
         private readonly FileSystemWatcher watcher;
-        private readonly DirectoryInfo directory; 
 
         public PSScriptChangeWatcher(
-            PSFileService psFileService, 
+            PSFileService psFileService,
             IOptions<POSHWebOptions> options,
-            IHubContext<ScriptHub, IScriptHub> scriptHub, 
+            IHubContext<ScriptHub, IScriptHub> scriptHub,
             ILogger<PSScriptChangeWatcher> logger)
         {
             _psFileService = psFileService;
@@ -34,7 +33,13 @@ namespace POSHWeb.Services
             {
                 directory = new DirectoryInfo(Path.GetFullPath(_options.ScriptFolder));
             }
+
             watcher = new FileSystemWatcher(directory.FullName);
+        }
+
+        public void Dispose()
+        {
+            watcher.Dispose();
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
@@ -91,11 +96,6 @@ namespace POSHWeb.Services
         {
             watcher.EnableRaisingEvents = false;
             return Task.CompletedTask;
-        }
-
-        public void Dispose()
-        {
-            watcher.Dispose();
         }
     }
 }

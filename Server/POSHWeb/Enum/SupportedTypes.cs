@@ -1,7 +1,7 @@
 ﻿namespace POSHWeb.Enum;
 
 /// <summary>
-/// This are the supported Parameter Types
+///     This are the supported Parameter Types
 /// </summary>
 public static class SupportedTypes
 {

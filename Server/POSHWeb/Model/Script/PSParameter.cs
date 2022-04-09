@@ -11,7 +11,7 @@ public class PSParameter : BaseEntity
     public string Type { get; set; }
     public string Default { get; set; }
 
-    public Boolean Mandatory { get; set; }
+    public bool Mandatory { get; set; }
     public int Order { get; set; }
     public string? ErrorMessage { get; set; }
     public string? HelpMessage { get; set; }
@@ -21,9 +21,9 @@ public class PSParameter : BaseEntity
     public override bool Equals(object? obj)
     {
         if (obj == null) return false;
-        PSParameter other = obj as PSParameter;
+        var other = obj as PSParameter;
 
-        return this.Name == other.Name
-               && this.Type == other.Type;
+        return Name == other.Name
+               && Type == other.Type;
     }
 }

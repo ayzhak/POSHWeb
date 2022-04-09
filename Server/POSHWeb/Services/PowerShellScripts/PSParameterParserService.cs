@@ -1,6 +1,5 @@
 ﻿using System.Management.Automation.Language;
 using System.Text.RegularExpressions;
-using NuGet.Protocol;
 using POSHWeb.Model;
 using POSHWeb.Model.Script;
 
@@ -15,7 +14,7 @@ public class PSParameterParserService
         var ast = Parser.ParseInput(script, out tokens, out parseErrors);
         var parametersAst = ast.FindAll(ast1 => ast1 is ParameterAst, false).Cast<ParameterAst>().ToList();
         var parameters = new List<PSParameter>();
-        int counter = 0;
+        var counter = 0;
         parametersAst.ForEach(parameterAst =>
         {
             var parameter = ConvertToPSParameter(parameterAst);
@@ -47,12 +46,8 @@ public class PSParameterParserService
             if (!parameterAstAttribute.TypeName.ToString().Equals("Parameter")) continue;
             // Check of Named arguments
             foreach (var namedAttributeArgumentAst in parameterAstAttribute.NamedArguments)
-            {
                 if (namedAttributeArgumentAst.ArgumentName.ToLower().Equals("helpmessage"))
-                {
                     return RemoveQuotes(namedAttributeArgumentAst.Argument.ToString());
-                }
-            }
         }
 
         return null;
@@ -70,7 +65,7 @@ public class PSParameterParserService
         return name.Substring(1);
     }
 
-    private Boolean IsMandatory(ParameterAst ast)
+    private bool IsMandatory(ParameterAst ast)
     {
         var attributeAst = ast.FindAll(ast1 => ast1 is AttributeAst, false).Cast<AttributeAst>();
         foreach (var parameterAstAttribute in attributeAst)
@@ -78,19 +73,17 @@ public class PSParameterParserService
             if (!parameterAstAttribute.TypeName.ToString().ToLower().Equals("parameter")) continue;
             // Check of Named arguments
             foreach (var namedAttributeArgumentAst in parameterAstAttribute.NamedArguments)
-            {
                 if (namedAttributeArgumentAst.ArgumentName.ToLower().Equals("mandatory"))
                 {
                     var value = namedAttributeArgumentAst.Argument.ToString().ToLower();
                     return value is "mandatory" or "$true";
                 }
-            }
         }
 
         return false;
     }
 
-    private Boolean FindAttribute(ParameterAst parameter, string AttributeName, out AttributeAst attribute)
+    private bool FindAttribute(ParameterAst parameter, string AttributeName, out AttributeAst attribute)
     {
         attribute = null;
         var attributeAst = parameter
@@ -117,16 +110,16 @@ public class PSParameterParserService
         options.RegexString = ParseAttributeValidatePattern(parameter);
         options.ScriptBlock = ParseAttributeValidateScript(parameter);
         options.ValidValues = ParseAttributeValidateSet(parameter);
-        Int32 minLength;
-        Int32 maxLength;
+        int minLength;
+        int maxLength;
         if (ParseAttributeValidateLength(parameter, out minLength, out maxLength))
         {
             options.MinLength = minLength;
             options.MaxLength = maxLength;
         }
 
-        Double minValue;
-        Double maxValue;
+        double minValue;
+        double maxValue;
         if (ParseAttributeValidateRange(parameter, out minValue, out maxValue))
         {
             options.MinValue = minValue;
@@ -151,8 +144,8 @@ public class PSParameterParserService
         MaxLength = 0;
         if (!FindAttribute(parameter, "ValidateLength", out attribute)) return false;
         if (attribute.PositionalArguments.Count != 2) throw new ArgumentException("There must be two arguments");
-        MinLength = (Int32) ((ConstantExpressionAst) attribute.PositionalArguments[0]).Value;
-        MaxLength = (Int32) ((ConstantExpressionAst) attribute.PositionalArguments[1]).Value;
+        MinLength = (int) ((ConstantExpressionAst) attribute.PositionalArguments[0]).Value;
+        MaxLength = (int) ((ConstantExpressionAst) attribute.PositionalArguments[1]).Value;
         return true;
     }
 
@@ -186,8 +179,8 @@ public class PSParameterParserService
         maxCount = 0;
         if (!FindAttribute(parameter, "ValidateCount", out attribute)) return false;
         if (attribute.PositionalArguments.Count != 2) throw new ArgumentException("There must be two arguments");
-        minCount = (Int32) ((ConstantExpressionAst)attribute.PositionalArguments[0]).Value;
-        maxCount = (Int32)((ConstantExpressionAst)attribute.PositionalArguments[1]).Value;
+        minCount = (int) ((ConstantExpressionAst) attribute.PositionalArguments[0]).Value;
+        maxCount = (int) ((ConstantExpressionAst) attribute.PositionalArguments[1]).Value;
         return true;
     }
 

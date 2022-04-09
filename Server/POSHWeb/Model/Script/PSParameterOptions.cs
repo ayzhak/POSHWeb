@@ -1,12 +1,13 @@
 ﻿using System.Text.RegularExpressions;
 using POSHWeb.Enum;
+
 namespace POSHWeb.Model.Script;
 
-public partial class PSParameterOptions
+public class PSParameterOptions
 {
     public int Id { get; set; }
-    public Int32? MinLength { get; set; }
-    public Int32? MaxLength { get; set; }
+    public int? MinLength { get; set; }
+    public int? MaxLength { get; set; }
     public string? RegexString { get; set; }
     public double? MinValue { get; set; }
     public double? MaxValue { get; set; }
@@ -17,16 +18,16 @@ public partial class PSParameterOptions
 
     public JobParameterState Valid(string text)
     {
-        if (! ValidateLength(text.Length)) return JobParameterState.InvalidLength;
-        if (! ValidateRegex(text)) return JobParameterState.NotMatchingWithRegex;
-        if (! ValidateValidValues(text)) return JobParameterState.ValueNotInPredefinedSet;
+        if (!ValidateLength(text.Length)) return JobParameterState.InvalidLength;
+        if (!ValidateRegex(text)) return JobParameterState.NotMatchingWithRegex;
+        if (!ValidateValidValues(text)) return JobParameterState.ValueNotInPredefinedSet;
         return JobParameterState.Valid;
     }
 
     public JobParameterState Valid(int number)
     {
-        if(!ValidateNumber(number)) return JobParameterState.NumberNotInRange;
-        if(!ValidateValidValues(number.ToString())) return JobParameterState.ValueNotInPredefinedSet;
+        if (!ValidateNumber(number)) return JobParameterState.NumberNotInRange;
+        if (!ValidateValidValues(number.ToString())) return JobParameterState.ValueNotInPredefinedSet;
         return JobParameterState.Valid;
     }
 
@@ -60,8 +61,9 @@ public partial class PSParameterOptions
         foreach (var s in array)
         {
             var state = Valid(s);
-            if(state != JobParameterState.Valid ) return state;
+            if (state != JobParameterState.Valid) return state;
         }
+
         return JobParameterState.Valid;
     }
 
@@ -73,6 +75,7 @@ public partial class PSParameterOptions
             var state = Valid(s);
             if (state != JobParameterState.Valid) return state;
         }
+
         return JobParameterState.Valid;
     }
 
@@ -84,6 +87,7 @@ public partial class PSParameterOptions
             var state = Valid(s);
             if (state != JobParameterState.Valid) return state;
         }
+
         return JobParameterState.Valid;
     }
 
@@ -95,6 +99,7 @@ public partial class PSParameterOptions
             var state = Valid(s);
             if (state != JobParameterState.Valid) return state;
         }
+
         return JobParameterState.Valid;
     }
 

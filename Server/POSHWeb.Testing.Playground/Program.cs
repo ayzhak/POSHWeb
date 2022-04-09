@@ -1,7 +1,3 @@
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Microsoft.AspNetCore.Mvc.Versioning;
-using POSHWeb.Client.Web.Core.Extensions;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

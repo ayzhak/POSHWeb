@@ -1,12 +1,10 @@
-﻿using System.Reflection;
-using System.Text.Json.Serialization;
-using Microsoft.VisualBasic.FileIO;
+﻿using Microsoft.VisualBasic.FileIO;
 using POSHWeb.Enum;
 using POSHWeb.Model.Script;
 
 namespace POSHWeb.Model;
 
-public class InputParameter: SimpleInputParameter
+public class InputParameter : SimpleInputParameter
 {
     public int Id { get; set; }
     public string Type { get; set; }
@@ -30,16 +28,13 @@ public class InputParameter: SimpleInputParameter
     protected T[] ParseArrayValue<T>(string value)
     {
         if (value == "" || value == null) return null;
-        List<T> list = new List<T>();
+        var list = new List<T>();
         var parser = new TextFieldParser(new StringReader(value));
         parser.SetDelimiters(",", ";");
         parser.HasFieldsEnclosedInQuotes = true;
-        string[]? fields = parser.ReadFields();
+        var fields = parser.ReadFields();
         if (fields == null) return null;
-        foreach (string s in fields)
-        {
-            list.Add((T) Convert.ChangeType(s, typeof(T)));
-        }
+        foreach (var s in fields) list.Add((T) Convert.ChangeType(s, typeof(T)));
 
         return list.ToArray();
     }

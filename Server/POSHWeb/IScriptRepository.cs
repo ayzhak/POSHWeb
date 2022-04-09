@@ -1,9 +1,8 @@
 ﻿using POSHWeb.Model;
 
-namespace POSHWeb
+namespace POSHWeb;
+
+public interface IScriptRepository
 {
-    public interface IScriptRepository
-    {
-        public PSScript Create(PSScript script);
-    }
+    public PSScript Create(PSScript script);
 }

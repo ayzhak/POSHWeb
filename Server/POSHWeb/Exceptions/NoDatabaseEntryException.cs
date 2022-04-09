@@ -1,6 +1,5 @@
-﻿namespace POSHWeb.Exceptions
+﻿namespace POSHWeb.Exceptions;
+
+public class NoDatabaseEntryException : Exception
 {
-    public class NoDatabaseEntryException: Exception
-    {
-    }
 }

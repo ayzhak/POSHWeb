@@ -3,12 +3,12 @@
 namespace POSHWeb.Core.Policies;
 
 /// <summary>
-/// This is the production CORS policy
+///     This is the production CORS policy
 /// </summary>
-public class ProdCorsPolicy: ICorsPolicy
+public class ProdCorsPolicy : ICorsPolicy
 {
-
     public string Name { get; } = "ProdCorsPolicy";
+
     public void Apply(CorsPolicyBuilder builder)
     {
         builder
