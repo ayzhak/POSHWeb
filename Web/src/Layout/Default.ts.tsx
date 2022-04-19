@@ -1,6 +1,17 @@
-import React, {PropsWithChildren} from "react";
+import React, {PropsWithChildren, useState} from "react";
 import Sidebar from "../Components/Sidebar/Sidebar";
-import {alpha, AppBar, Box, Breadcrumbs, IconButton, InputBase, styled, Toolbar, Typography} from "@mui/material";
+import {
+    alpha,
+    AppBar, Avatar,
+    Box,
+    Breadcrumbs,
+    CssBaseline,
+    IconButton,
+    InputBase, Menu, MenuItem,
+    styled,
+    Toolbar,
+    Typography
+} from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import useReactRouterBreadcrumbs from "use-react-router-breadcrumbs";
 import {NavLink} from "react-router-dom";
@@ -58,15 +69,17 @@ const StyledInputBase = styled(InputBase)(({theme}) => ({
 export default function Layout({children}: PropsWithChildren<{}>) {
     const signalRConnectionStatus = useRecoilValue(signalRConnectionState);
     const breadcrumbs = useReactRouterBreadcrumbs();
+    const [anchorElUser, setAnchorElUser] = useState<any>(null);
     return (
         <>
             <Box sx={{display: 'flex'}}>
+                <CssBaseline/>
                 <AppBar position="fixed" sx={{zIndex: (theme) => theme.zIndex.drawer + 1}}>
-                    <Toolbar variant="dense">
+                    <Toolbar>
                         <IconButton edge="start" color="inherit" aria-label="menu" sx={{mr: 2}}>
                             <MenuIcon/>
                         </IconButton>
-                        <Typography variant="h6" color="inherit" component="div">
+                        <Typography variant="h6" noWrap component="div">
                             POSHWeb
                         </Typography>
 
@@ -80,13 +93,33 @@ export default function Layout({children}: PropsWithChildren<{}>) {
                             />
                         </Search>
                         <Box sx={{flexGrow: 1}}/>
-                        <Box sx={{display: {xs: 'none', md: 'flex'}}}>
+                        <Box width="40px">
                             <StatusDot status={statusMapping[signalRConnectionStatus]} popoverText="Test"/>
                         </Box>
+                        <IconButton onClick={event => setAnchorElUser(event.currentTarget)}>
+                            <Avatar alt="Remy Sharp" src="/images/placeholders/avatar.jpg" />
+                        </IconButton>
+                        <IconButton>
+                        </IconButton>
+                        <Menu
+                            id="menu-appbar"
+                            anchorEl={anchorElUser}
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'right',
+                            }}
+                            keepMounted
+                            open={Boolean(anchorElUser)}
+                            onClose={() => setAnchorElUser(null)}
+                        >
+                                <MenuItem key="profile" onClick={() => setAnchorElUser(null)}>
+                                    <Typography textAlign="center">Profile</Typography>
+                                </MenuItem>
+                        </Menu>
                     </Toolbar>
                 </AppBar>
                 <Sidebar/>
-                <Box component="main" sx={{flexGrow: 1, p: 3}}>
+                <Box component="main" sx={{flexGrow: 1} }>
                     <Toolbar/>
                     <Box display="flex" justifyContent="center" alignItems="center">
                         <Breadcrumbs aria-label="breadcrumb">
