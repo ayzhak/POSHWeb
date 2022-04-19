@@ -169,3 +169,4 @@ sketch
 # Temporary env files
 /public/env-config.js
 env-config.js
+.idea
