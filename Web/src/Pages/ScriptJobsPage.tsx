@@ -1,8 +1,5 @@
-
-
 import React from "react";
 import {Typography} from "@mui/material";
-import ScriptsTable from "../Components/Scripts/ScriptsTable";
 import ScriptsJobsTable from "../Components/Jobs/ScriptsJobsTable";
 
 

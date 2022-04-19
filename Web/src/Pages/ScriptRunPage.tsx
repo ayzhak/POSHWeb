@@ -5,8 +5,6 @@ import {useRecoilState, useRecoilValue} from "recoil";
 import {scriptQuery, scriptRunState, scriptsJobsState} from "../State/atoms";
 import {DynamicForm} from "../Components/DynamicForm/DynamicForm";
 import {FieldParameter, InputType} from "../Components/DynamicForm/FieldParameter";
-import {toast} from "react-toastify";
-import {isBool} from "react-toastify/dist/utils";
 import {isBoolean, isNumber} from "util";
 import {LoadingTea} from "../Components/Loading/LoadingTea";
 import {InputParameter, PSParameter, ScriptApi} from "../apiClient";
