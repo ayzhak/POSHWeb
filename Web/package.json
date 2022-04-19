@@ -11,8 +11,6 @@
     "@mui/material": "^5.5.1",
     "axios": "^0.26.1",
     "date-fns": "^2.28.0",
-    "eslint-config-react-app": "^6.0.0",
-    "formik": "^2.2.9",
     "i18next": "^21.6.14",
     "i18next-browser-languagedetector": "^6.1.4",
     "i18next-http-backend": "^1.4.0",
@@ -24,11 +22,9 @@
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.28.1",
     "react-i18next": "^11.16.1",
-    "react-lazylog": "^4.5.3",
     "react-router-dom": "^6.2.2",
-    "react-scripts": "5.0.0",
+    "react-scripts": "5.0.1",
     "react-toastify": "^8.2.0",
-    "react-virtuoso": "^2.8.6",
     "recoil": "^0.6.1",
     "recoil-nexus": "^0.3.15",
     "typescript": "^4.6.2",
@@ -40,9 +36,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "openapi": "openapi-generator-cli generate -g typescript-axios -i http://localhost:5223/swagger/v1/swagger.json -o ./src/apiClient",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "openapi": "openapi-generator-cli generate -g typescript-axios -i http://localhost:5223/swagger/v1/swagger.json -o ./src/apiClient"
   },
   "browserslist": {
     "production": [
@@ -63,16 +57,6 @@
   },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.4.26",
-    "@storybook/addon-actions": "^6.4.19",
-    "@storybook/addon-essentials": "^6.4.19",
-    "@storybook/addon-interactions": "^6.4.19",
-    "@storybook/addon-links": "^6.4.19",
-    "@storybook/builder-webpack5": "^6.4.19",
-    "@storybook/manager-webpack5": "^6.4.19",
-    "@storybook/node-logger": "^6.4.19",
-    "@storybook/preset-create-react-app": "^4.1.0",
-    "@storybook/react": "^6.4.19",
-    "@storybook/testing-library": "^0.0.9",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
@@ -84,9 +68,6 @@
     "@types/react-beautiful-dnd": "^13.1.2",
     "@types/react-dom": "^17.0.14",
     "@types/react-i18next": "^8.1.0",
-    "@types/react-lazylog": "^4.5.1",
-    "storybook-react-context": "^0.6.0",
     "webpack": "^5.70.0"
   }
 }
-
