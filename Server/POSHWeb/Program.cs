@@ -1,12 +1,12 @@
 ﻿using System.Collections.Immutable;
 using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
-using POSHWeb.Client.Web.Core.Extensions;
 using POSHWeb.Scheduler;
 using POSHWeb.Scheduler.Job;
 using POSHWeb.Scheduler.Repository;
 using POSHWeb.DAL;
 using POSHWeb.Data;
+using POSHWeb.Extensions;
 using POSHWeb.Options;
 using POSHWeb.Services;
 using SignalRChat.Hubs;

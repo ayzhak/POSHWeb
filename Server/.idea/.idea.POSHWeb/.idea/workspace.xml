@@ -10,137 +10,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="23a8638c-23a4-4450-bf8f-7e3738cffd0f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.POSHWeb/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.POSHWeb/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.POSHWeb/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.POSHWeb/.idea/projectSettingsUpdater.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.POSHWeb/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Common/Enum/IntervalType.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Common/Enum/PSRuntimeVersioncs.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Common/Enum/RunspaceType.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Common/Enum/SchedulerOperationMode.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Common/Enum/SeverityLevel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Common/Enum/SupportedType.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Common/Exceptions/ExecutionException.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Common/Model/BasicType.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Common/Model/Job/Credentials.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Common/Model/Job/InputParameter.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Common/Model/Job/Job.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Common/Model/Job/JobRuns.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Common/Model/Runspace/PSVariables.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Common/Model/Runspace/RunspaceSettings.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Common/Model/Schedule/JobSchedule.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Common/Model/Script/PSHelp.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Common/Model/Script/PSParameter.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Common/POSHWeb.Common.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Environment.PowerShell51/Converter/LogProgressConverter.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Environment.PowerShell51/Interfaces/IExecuter.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Environment.PowerShell51/Interfaces/IPSInteraction.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Environment.PowerShell51/Interfaces/IPSLogger.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Environment.PowerShell51/Interfaces/IRunspaceManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Environment.PowerShell51/POSHWeb.Environment.PowerShell51.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Environment.PowerShell51/Runspace/Host/UnifiedHostUserInterface.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Environment.PowerShell51/Runspace/Host/UnifiedPSHost.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Environment.PowerShell51/Runspace/Host/UnifiedUIRawInterface.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Environment.PowerShell51/Runspace/RunspaceManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Environment.PowerShell51/Util/PSObjectJsonConverter.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Environment.PowerShell51/Util/SecureStringUtil.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Environment.PowerShell51Test/POSHWeb.Environment.PowerShell51Test.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Environment.PowerShell51Test/UnitTest1.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Environment/Converter/LogProgressConverter.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Environment/Interfaces/IExecuter.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Environment/Interfaces/IRunspaceManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Environment/PSInteractionConsole.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Environment/Util/PSObjectJsonConverter.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Environment/Util/SecureStringUtil.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.EnvironmentTests/Converter/PSObjectJsonConverter.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.EnvironmentTests/Converter/PSObjectJsonConverterTest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Scheduler/POSHWeb.Scheduler.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.Scheduler/TriggerConverter.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb.SchedulerTest/Repository/SchedulerRepositoryTest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb/DAL/DatabaseContext.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb/Extensions/AppBuilderExtensions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb/Extensions/AppHostExtensions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb/Extensions/AppServiceExtensions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb/Options/SwaggerOptions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb/Policies/DevCorsPolicy.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb/Policies/ICorsPolicy.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb/Policies/ProdCorsPolicy.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb/Services/Files/ScriptChangeWatcher.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb/Services/Files/ScriptFSSyncService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb/Services/PowerShellScripts/PSParserService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/POSHWeb/Services/PowerShellScripts/ScriptValidatorService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb.Core/Extensions/AppBuilderExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb.Core/Extensions/AppBuilderExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb.Core/Options/POSHWebOptions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb.Core/POSHWeb.Core.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb.Core/POSHWeb.Core.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb.ScriptRunner/POSHWeb.ScriptRunner.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb.ScriptRunner/POSHWeb.ScriptRunner.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb.ScriptRunner/QueuedHostedService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb.ScriptRunner/QueuedHostedService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb.Testing.Playground/Controllers/V1/HomeController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb.Testing.Playground/Controllers/V2/HomeController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb.Testing.Playground/Controllers/WeatherForecastController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb.Testing.Playground/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb.Testing.Playground/POSHWeb.Testing.Playground.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb.Testing.Playground/Program.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb.Testing.Playground/Properties/launchSettings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb.Testing.Playground/WeatherForecast.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb.Testing.Playground/appsettings.Development.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb.Testing.Playground/appsettings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb.Tests/POSHWebTests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb.Tests/POSHWebTests.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb.Tests/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb.Tests/Services/HasherServiceTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb.Tests/Services/HasherServiceTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb.Tests/Services/PSFileServiceTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb.Tests/Services/PSFileServiceTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb.Tests/Services/PSParamaterServiceTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb.Tests/Services/PSParamaterServiceTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb.Tests/Services/PSScriptValidatorTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb.Tests/Services/PSScriptValidatorTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb.sln" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Controllers/V1/JobController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Controllers/V1/ScriptController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb/Controllers/V1/ScriptController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Database/DatabaseContext.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Enum/JobParameterState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb.Common/Enum/JobParameterState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Enum/JobState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb.Common/Enum/JobState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Enum/SupportedTypes.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Exceptions/FileStillExistException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb.Common/Exceptions/FileStillExistException.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Exceptions/InvalidFileExtensionException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb.Common/Exceptions/InvalidFileExtensionException.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Exceptions/InvalidPowerShellContentException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb.Common/Exceptions/InvalidPowerShellContentException.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Exceptions/MoreThanOneDatabaseEntryException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb.Common/Exceptions/MoreThanOneDatabaseEntryException.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Exceptions/NoDatabaseEntryException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb.Common/Exceptions/NoDatabaseEntryException.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Exceptions/ParameterParseException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb.Common/Exceptions/ParameterParseException.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Extensions/ListExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb.Common/Extensions/ListExtension.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Hubs/IScriptHub.cs" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb/Hubs/IScriptHub.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Hubs/ScriptHub.cs" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb/Hubs/ScriptHub.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/IScriptRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Model/BaseEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb.Common/Model/BaseEntity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Model/Job/InputParameter.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Model/Job/Job.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Model/Job/Parameters/BooleanArrayInputParameter.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Model/Job/Parameters/BooleanInputParameter.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Model/Job/Parameters/DateTimeArrayInputParameter.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Model/Job/Parameters/DateTimeInputParameter.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Model/Job/Parameters/DoubleArrayInputParameter.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Model/Job/Parameters/DoubleInputParameter.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Model/Job/Parameters/FloatArrayInputParameter.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Model/Job/Parameters/FloatInputParameter.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Model/Job/Parameters/IntegerArrayInputParameter.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Model/Job/Parameters/IntegerInputParameter.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Model/Job/Parameters/StringArrayInputParameter.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Model/Job/Parameters/StringInputParameter.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Model/Job/SimpleInputParameter.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Model/Script/PSParameter.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Model/Script/PSParameterOptions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb.Common/Model/Script/PSParameterOptions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Model/Script/PSScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb.Common/Model/Script/PSScript.cs" afterDir="false" />
+    <list default="true" id="23a8638c-23a4-4450-bf8f-7e3738cffd0f" name="Changes" comment=":construction: Its to late">
       <change beforePath="$PROJECT_DIR$/POSHWeb/POSHWeb.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb/POSHWeb.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Scripts/CreateUser.ps1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Scripts/fulltemplate.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb/Scripts/fulltemplate.ps1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Scripts/test2.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb/Scripts/test2.ps1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Services/Executer/InputParameterParser.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Services/Executer/InputParameterValidator.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Services/Executer/ScriptExecuterService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Services/Files/PSFileService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Services/Files/PSScriptChangeWatcher.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Services/PowerShellScripts/PSParameterParserService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/Services/PowerShellScripts/PSScriptValidator.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/POSHWeb/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/POSHWeb/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -277,8 +148,23 @@
       <workItem from="1654161403538" duration="3409000" />
       <workItem from="1654185711400" duration="16835000" />
       <workItem from="1654366298416" duration="11525000" />
-      <workItem from="1654380072579" duration="1213000" />
+      <workItem from="1654380072579" duration="1514000" />
     </task>
+    <task id="LOCAL-00001" summary=":construction: Added WIP">
+      <created>1654381353148</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1654381353148</updated>
+    </task>
+    <task id="LOCAL-00002" summary=":construction: Its to late">
+      <created>1654381424982</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1654381424982</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -300,6 +186,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value=":construction: Added WIP" />
+    <MESSAGE value=":construction: Its to late" />
+    <option name="LAST_COMMIT_MESSAGE" value=":construction: Its to late" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

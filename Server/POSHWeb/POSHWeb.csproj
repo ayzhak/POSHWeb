@@ -30,7 +30,6 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.2" />
 		<PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
 		<PackageReference Include="Serilog.Settings.Configuration" Version="3.3.0" />
 		<PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
@@ -40,7 +39,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\POSHWeb.Scheduler\POSHWeb.Scheduler.csproj" />
-		<ProjectReference Include="..\POSHWeb.Core\POSHWeb.Core.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
