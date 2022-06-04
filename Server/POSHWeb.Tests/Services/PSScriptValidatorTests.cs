@@ -11,7 +11,7 @@ public class PSScriptValidatorTests
         var script = @"
 Write-Host 'Test'
 ";
-        var validator = new PSScriptValidator(new NullLogger<PSScriptValidator>());
+        var validator = new ScriptValidatorService(new NullLogger<ScriptValidatorService>());
         Assert.True(validator.ValidateInput(script));
     }
 
@@ -21,7 +21,7 @@ Write-Host 'Test'
         var script = @"
 Write-Host Test'
 ";
-        var validator = new PSScriptValidator(new NullLogger<PSScriptValidator>());
+        var validator = new ScriptValidatorService(new NullLogger<ScriptValidatorService>());
         Assert.False(validator.ValidateInput(script));
     }
 
@@ -29,7 +29,7 @@ Write-Host Test'
     public void ValidateInput_EmptyInput_ShouldBeInvalid()
     {
         var script = @"";
-        var validator = new PSScriptValidator(new NullLogger<PSScriptValidator>());
+        var validator = new ScriptValidatorService(new NullLogger<ScriptValidatorService>());
         Assert.True(validator.ValidateInput(script));
     }
 }

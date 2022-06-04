@@ -8,8 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
-    <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.2.0" />
-    <PackageReference Include="System.Management.Automation" Version="7.2.0" />
+    <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.3.0-preview.4" />
+    <PackageReference Include="System.Management.Automation" Version="7.2.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\POSHWeb.Scheduler\POSHWeb.Scheduler.csproj" />
   </ItemGroup>
 
 </Project>

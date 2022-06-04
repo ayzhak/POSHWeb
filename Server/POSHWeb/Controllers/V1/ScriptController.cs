@@ -1,193 +1,88 @@
 ﻿#nullable disable
-using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
-using POSHWeb.Data;
-using POSHWeb.Enum;
+using POSHWeb.DAL;
 using POSHWeb.Model;
-using POSHWeb.Services;
 
 namespace POSHWeb.Controllers;
 
 [ApiController]
 [Route("api/v{version:apiVersion}/[controller]")]
-//[Route("api/[controller]")]
 [ApiVersion("1.0")]
 public class ScriptController : ControllerBase
 {
-    private readonly DatabaseContext _context;
-    private readonly ScriptExecuter _scriptExecuter;
+    private readonly UnitOfWork _unitOfWork;
 
-    public ScriptController(DatabaseContext context, ScriptExecuter scriptExecuter)
+    public ScriptController(UnitOfWork unitOfWork)
     {
-        _scriptExecuter = scriptExecuter;
-        _context = context;
+        _unitOfWork = unitOfWork;
     }
-
-    // GET: api/Scripts
+    
     [HttpGet]
     public async Task<ActionResult<IEnumerable<PSScript>>> Get()
     {
-        return _context.Script
+        return _unitOfWork.ScriptRepository.Get(include: scripts =>scripts 
+            .Include(script => script.Help)
             .Include(script => script.Parameters)
             .ThenInclude(parameter => parameter.Options)
+            .Include(script => script.Parameters)
+            .ThenInclude(parameter => parameter.Default))
             .ToList();
     }
-
-    // GET: api/Scripts/5
+    
     [HttpGet("{id}")]
     public async Task<ActionResult<PSScript>> Get(int id)
     {
-        var script = _context.Script
-            .Include(psScript => psScript.Parameters)
-            .ThenInclude(parameter => parameter.Options)
-            .First(psScript => psScript.Id.Equals(id));
+        var script = _unitOfWork.ScriptRepository.Get(
+                filter: psScript => psScript.Id == id,
+                include: scripts =>scripts 
+                .Include(script => script.Help)
+                .Include(script => script.Parameters)
+                .ThenInclude(parameter => parameter.Options)
+                .Include(script => script.Parameters)
+                .ThenInclude(parameter => parameter.Default))
+            .First();
 
         if (script == null) return NotFound();
 
         return script;
     }
-
-    [HttpPost("{id}/run")]
-    public async Task<ActionResult<Job>> Run(int id, List<SimpleInputParameter> parameters)
-    {
-        var script = _context.Script
-            .Include(psScript => psScript.Parameters)
-            .ThenInclude(parameter => parameter.Options)
-            .First(psScript => psScript.Id.Equals(id));
-
-        var inputParameters = new List<InputParameter>();
-        var errorList = new List<string>();
-        if (parameters.Select(p => p.Name).Distinct().Count() !=
-            parameters.Select(parameter => parameter.Name).Count())
-            return Problem(statusCode: (int) HttpStatusCode.BadRequest, type: "PARAMETER_NOT_UNIQUE",
-                title: "Parameter names are not unique.");
-
-        foreach (var parameter in parameters)
-            try
-            {
-                inputParameters.Add(new InputParameter
-                {
-                    Type = FindMatchingType(script.Parameters, parameter),
-                    Name = parameter.Name,
-                    Value = parameter.Value,
-                    State = JobParameterState.NotValidated
-                });
-            }
-            catch (InvalidOperationException e)
-            {
-                errorList.Add(parameter.Name);
-            }
-
-        if (errorList.Count > 0)
-            return Problem(statusCode: (int) HttpStatusCode.BadRequest, type: "PARAMETER_NOT_EXIST",
-                title: "One or more validation error.",
-                detail: $"These parameters doesn't exist: {string.Join(" ", errorList)}");
-
-        var job = new Job
-        {
-            FileName = script.FileName,
-            FullPath = script.FullPath,
-            Content = script.Content,
-            ContentHash = script.ContentHash,
-            Parameters = inputParameters,
-            Log = ""
-        };
-
-        _context.Jobs.Add(job);
-        _context.SaveChanges();
-
-        await _scriptExecuter.QueueScriptExecution(job, script);
-        return job;
-    }
-
-    private string FindMatchingType(ICollection<PSParameter> scriptParameters,
-        SimpleInputParameter simpleInputParameter)
-    {
-        var param = scriptParameters.First(parameter => simpleInputParameter.Name.Equals(parameter.Name));
-        return param.Type;
-    }
-
-    // PUT: api/Scripts/5
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    //[HttpPut("{id}")]
+    
     [NonAction]
     public async Task<IActionResult> Put(int id, PSScript psScript)
     {
         if (id != psScript.Id) return BadRequest();
-
-        _context.Entry(psScript).State = EntityState.Modified;
-
+        
         try
         {
-            await _context.SaveChangesAsync();
+            _unitOfWork.ScriptRepository.Update(psScript);
+            _unitOfWork.Save();
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!Exists(id))
+            if (!_unitOfWork.ScriptRepository.Exist(script => script.Id == id))
                 return NotFound();
             throw;
         }
 
         return NoContent();
     }
-
-    // POST: api/Scripts
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    //[HttpPost]
+    
     [NonAction]
     public async Task<ActionResult<PSScript>> Post(PSScript psScript)
     {
-        _context.Script.Add(psScript);
-        await _context.SaveChangesAsync();
+        _unitOfWork.ScriptRepository.Update(psScript);
+        _unitOfWork.Save();
 
         return CreatedAtAction("Get", new {id = psScript.Id}, psScript);
     }
-
-    // DELETE: api/Scripts/5
-    //[HttpDelete("{id}")]
+    
+    
     [NonAction]
     public async Task<IActionResult> Delete(int id)
     {
-        var script = await _context.Script.FindAsync(id);
-        if (script == null) return NotFound();
-
-        _context.Script.Remove(script);
-        await _context.SaveChangesAsync();
-
+        _unitOfWork.ScriptRepository.Delete(id);
+        _unitOfWork.Save();
         return NoContent();
-    }
-
-    private bool Exists(int id)
-    {
-        return _context.Script.Any(e => e.Id == id);
-    }
-
-    public class ErrorModel
-    {
-        public ErrorModel(HttpStatusCode statusCode, string message)
-        {
-            StatusCode = (int) statusCode;
-            Message = message;
-            ValidationErrors = new Dictionary<string, ModelErrorCollection>();
-        }
-
-        public ErrorModel(HttpStatusCode statusCode)
-        {
-            StatusCode = (int) statusCode;
-            ValidationErrors = new Dictionary<string, ModelErrorCollection>();
-        }
-
-        public string Message { get; set; }
-        public int StatusCode { get; set; }
-        public Dictionary<string, ModelErrorCollection> ValidationErrors { get; set; }
-        public Exception Exception { get; set; }
-    }
-
-    public class ParameterError
-    {
-        public string Name { get; set; }
-        public string Message { get; set; }
     }
 }

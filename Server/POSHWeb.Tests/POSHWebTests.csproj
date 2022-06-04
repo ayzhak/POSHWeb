@@ -11,7 +11,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
     <PackageReference Include="Moq" Version="4.17.2" />
-    <PackageReference Include="System.Management.Automation" Version="7.2.2" />
+    <PackageReference Include="System.Management.Automation" Version="7.2.0" />
+    <PackageReference Include="System.Security.Principal" Version="4.3.0" />
+    <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -24,11 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\POSHWeb.Scheduler\POSHWeb.Scheduler.csproj" />
     <ProjectReference Include="..\POSHWeb\POSHWeb.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Lab\" />
   </ItemGroup>
 
 </Project>

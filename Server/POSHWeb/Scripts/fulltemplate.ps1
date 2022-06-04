@@ -66,8 +66,7 @@ param
     #[Parameter(Mandatory)] [string]$WEBJEAHostname=($env:computername), #passes the client machine from asp.net, will return IP address some times
 
 #strings
-    [Parameter(Position=0, Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName,
-    HelpMessage='What computer name would you like to target?')]
+    [Parameter(Position=0, Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName, HelpMessage='What computer name would you like to target?')]
 	#also random comment
     [string]$Input01Mandatory,
 	#just a comment
@@ -77,7 +76,7 @@ param
 	<# comment block #>
     [string]$Input02MandatoryMinLen = "ABC",
 
-    [Parameter(Position=2,mandatory=$false,HelpMessage="Help Message on MultiLine Directive")]
+    [Parameter(Position=2, mandatory=$false, HelpMessage="Help Message on MultiLine Directive")]
 	#WEBJEA-Multiline
     [string]$Input03Str, #random comment
 
@@ -107,6 +106,8 @@ param
 
     [Parameter()]
     [double]$NInput4,
+    [Parameter()]
+    [float]$NInput5,
 
 #listbox
     [Parameter()]

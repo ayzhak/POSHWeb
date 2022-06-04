@@ -1,12 +1,13 @@
 ﻿using System.Linq;
 using System.Management.Automation.Language;
+using POSHWeb.Enum;
 using Xunit;
 
 namespace POSHWeb.Services.Tests;
 
 public class PSParamaterServiceTests
 {
-    private readonly PSParameterParserService _psParameterParserService = new();
+    private readonly PSParserService _psParameterParserService = new();
 
     [Fact]
     public void ParseParametersTest()
@@ -29,10 +30,10 @@ Write-Host 'Test'
         Assert.Single(parametersAst);
         var parameter = parametersAst[0];
 
-        var parsed = _psParameterParserService.ConvertToPSParameter(parameter);
+        var parsed = _psParameterParserService.Parse(parameter);
         Assert.Equal("GivenName", parsed.Name);
         Assert.True(parsed.Mandatory);
-        Assert.Equal("String", parsed.Type);
+        Assert.Equal(SupportedType.String, parsed.Type);
     }
 
     [Fact]
@@ -56,10 +57,10 @@ Write-Host 'Test'
         Assert.Single(parametersAst);
         var parameter = parametersAst[0];
 
-        var parsed = _psParameterParserService.ConvertToPSParameter(parameter);
+        var parsed = _psParameterParserService.Parse(parameter);
         Assert.Equal("GivenName", parsed.Name);
         Assert.True(parsed.Mandatory);
-        Assert.Equal("String", parsed.Type);
+        Assert.Equal(SupportedType.String, parsed.Type);
     }
 
     [Fact]
@@ -82,10 +83,10 @@ Write-Host 'Test'
         Assert.Single(parametersAst);
         var parameter = parametersAst[0];
 
-        var parsed = _psParameterParserService.ConvertToPSParameter(parameter);
+        var parsed = _psParameterParserService.Parse(parameter);
         Assert.Equal("GivenName", parsed.Name);
         Assert.False(parsed.Mandatory);
-        Assert.Equal("String", parsed.Type);
+        Assert.Equal(SupportedType.String, parsed.Type);
     }
 
     [Fact]
@@ -108,10 +109,10 @@ Write-Host 'Test'
         Assert.Single(parametersAst);
         var parameter = parametersAst[0];
 
-        var parsed = _psParameterParserService.ConvertToPSParameter(parameter);
+        var parsed = _psParameterParserService.Parse(parameter);
         Assert.Equal("GivenName", parsed.Name);
         Assert.False(parsed.Mandatory);
-        Assert.Equal("Object", parsed.Type);
+        Assert.Equal(SupportedType.None, parsed.Type);
     }
 
     [Fact]
@@ -125,19 +126,17 @@ param(
 
 Write-Host 'Test'
 ";
-        var parameters = _psParameterParserService.ExtractParameters(script).ToList();
+        var parameters = _psParameterParserService.Parse(script).ToList();
         Assert.Equal(2, parameters.Count);
 
         var parameter1 = parameters[0];
         Assert.Equal("GivenName", parameter1.Name);
         Assert.False(parameter1.Mandatory);
-        Assert.Equal("Object", parameter1.Type);
         Assert.Equal(0, parameter1.Order);
 
         var parameter2 = parameters[1];
         Assert.Equal("LastName", parameter2.Name);
         Assert.False(parameter2.Mandatory);
-        Assert.Equal("Object", parameter2.Type);
         Assert.Equal(1, parameter2.Order);
     }
 
@@ -152,19 +151,17 @@ param(
 
 Write-Host 'Test'
 ";
-        var parameters = _psParameterParserService.ExtractParameters(script).ToList();
+        var parameters = _psParameterParserService.Parse(script).ToList();
         Assert.Equal(2, parameters.Count);
 
         var parameter1 = parameters[0];
         Assert.Equal("GivenName", parameter1.Name);
         Assert.False(parameter1.Mandatory);
-        Assert.Equal("Object", parameter1.Type);
         Assert.Equal(0, parameter1.Order);
 
         var parameter2 = parameters[1];
         Assert.Equal("LastName", parameter2.Name);
         Assert.False(parameter2.Mandatory);
-        Assert.Equal("String", parameter2.Type);
         Assert.Equal(1, parameter2.Order);
     }
 
@@ -179,13 +176,12 @@ param(
 
 Write-Host 'Test'
 ";
-        var parameters = _psParameterParserService.ExtractParameters(script).ToList();
+        var parameters = _psParameterParserService.Parse(script).ToList();
         Assert.Single(parameters);
 
         var parameter = parameters[0];
         Assert.Equal("LastName", parameter.Name);
         Assert.False(parameter.Mandatory);
-        Assert.Equal("String", parameter.Type);
         Assert.Equal(0, parameter.Order);
         Assert.Equal("Steve", parameter.Options.ValidValues?[0]);
         Assert.Equal("Mary", parameter.Options.ValidValues?[1]);
@@ -202,13 +198,12 @@ param(
 
 Write-Host 'Test'
 ";
-        var parameters = _psParameterParserService.ExtractParameters(script).ToList();
+        var parameters = _psParameterParserService.Parse(script).ToList();
         Assert.Single(parameters);
 
         var parameter = parameters[0];
         Assert.Equal("LastName", parameter.Name);
         Assert.False(parameter.Mandatory);
-        Assert.Equal("String", parameter.Type);
         Assert.Equal(0, parameter.Order);
         Assert.Equal("^DV-\\d{7}", parameter.Options.RegexString);
     }
@@ -224,13 +219,12 @@ param(
 
 Write-Host 'Test'
 ";
-        var parameters = _psParameterParserService.ExtractParameters(script).ToList();
+        var parameters = _psParameterParserService.Parse(script).ToList();
         Assert.Single(parameters);
 
         var parameter = parameters[0];
         Assert.Equal("LastName", parameter.Name);
         Assert.False(parameter.Mandatory);
-        Assert.Equal("String", parameter.Type);
         Assert.Equal(0, parameter.Order);
         Assert.Equal(1, parameter.Options.MinLength);
         Assert.Equal(10, parameter.Options.MaxLength);
@@ -247,13 +241,12 @@ param(
 
 Write-Host 'Test'
 ";
-        var parameters = _psParameterParserService.ExtractParameters(script).ToList();
+        var parameters = _psParameterParserService.Parse(script).ToList();
         Assert.Single(parameters);
 
         var parameter = parameters[0];
         Assert.Equal("LastName", parameter.Name);
         Assert.False(parameter.Mandatory);
-        Assert.Equal("String", parameter.Type);
         Assert.Equal(0, parameter.Order);
         Assert.Equal(1, parameter.Options.MinValue);
         Assert.Equal(10, parameter.Options.MaxValue);
@@ -270,13 +263,12 @@ param(
 
 Write-Host 'Test'
 ";
-        var parameters = _psParameterParserService.ExtractParameters(script).ToList();
+        var parameters = _psParameterParserService.Parse(script).ToList();
         Assert.Single(parameters);
 
         var parameter = parameters[0];
         Assert.Equal("LastName", parameter.Name);
         Assert.False(parameter.Mandatory);
-        Assert.Equal("String", parameter.Type);
         Assert.Equal(0, parameter.Order);
         Assert.Equal(0.01, parameter.Options.MinValue);
         Assert.Equal(0.1, parameter.Options.MaxValue);
@@ -293,13 +285,12 @@ param(
 
 Write-Host 'Test'
 ";
-        var parameters = _psParameterParserService.ExtractParameters(script).ToList();
+        var parameters = _psParameterParserService.Parse(script).ToList();
         Assert.Single(parameters);
 
         var parameter = parameters[0];
         Assert.Equal("Path", parameter.Name);
         Assert.False(parameter.Mandatory);
-        Assert.Equal("String", parameter.Type);
         Assert.Equal(0, parameter.Order);
         Assert.Equal("{Test-Path -Path $_ -PathType Container}", parameter.Options.ScriptBlock);
     }
@@ -315,13 +306,12 @@ param(
 
 Write-Host 'Test'
 ";
-        var parameters = _psParameterParserService.ExtractParameters(script).ToList();
+        var parameters = _psParameterParserService.Parse(script).ToList();
         Assert.Single(parameters);
 
         var parameter = parameters[0];
         Assert.Equal("LastName", parameter.Name);
         Assert.False(parameter.Mandatory);
-        Assert.Equal("String", parameter.Type);
         Assert.Equal(0, parameter.Order);
         Assert.Equal("^DV-\\d{7}", parameter.Options.RegexString);
         Assert.Equal("Test error message", parameter.ErrorMessage);

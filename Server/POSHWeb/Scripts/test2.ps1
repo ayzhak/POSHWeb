@@ -1,8 +1,10 @@
 param
 (
-    [Parameter(Mandatory=$true, Position=0, HelpMessage='Aus dem Vornamen werden die restlichen Attribute erstellt für den Account')]
-    [ValidateSet('Input','Output','Both','a','b','c','d',1,2)] #any set of values you want here
-    [string[]]$Input09BConstrainedSet=@('a','d')
+    #any set of values you want here
+    [ComponentModel.DisplayName("Hallo zusammen")]
+    [Parameter(Mandatory=$false, Position=0, HelpMessage='Aus dem Vornamen werden die restlichen Attribute erstellt für den Account')]
+    [ValidateSet('Input','Output','Both','a','b','c','d',1,2)] 
+    [string[]]$Input09BConstrainedSet='a'
 )
 
 begin {
@@ -28,7 +30,11 @@ function start-countdown {
    }
 }
 
-start-countdown -sleepintervalsec 5
+start-countdown -sleepintervalsec 1
+
+return @{
+    Test="Test"
+}
 
 
 } #/process

@@ -117,17 +117,17 @@ public class PSFileServiceTests
         return filePath;
     }
 
-    private static PSFileService FactoryPSFileService(out DatabaseContext dbContext)
+    private static ScriptFSSyncService FactoryPSFileService(out DatabaseContext dbContext)
     {
         var servicesMock = MockDBContext.CreateMockIServiceScopeFactoryForDB(out var context);
         dbContext = context;
 
-        var psfileService = new PSFileService(
+        var psfileService = new ScriptFSSyncService(
             servicesMock.Object,
             new HasherService(),
-            new NullLogger<PSFileService>(),
-            new PSScriptValidator(new NullLogger<PSScriptValidator>()),
-            new PSParameterParserService());
+            new NullLogger<ScriptFSSyncService>(),
+            new ScriptValidatorService(new NullLogger<ScriptValidatorService>()),
+            new PSParserService());
         return psfileService;
     }
 }

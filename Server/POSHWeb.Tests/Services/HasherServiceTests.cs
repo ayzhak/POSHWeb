@@ -1,6 +1,7 @@
-﻿using Xunit;
+﻿using POSHWeb.Services;
+using Xunit;
 
-namespace POSHWeb.Services.Tests;
+namespace POSHWebTests.Services;
 
 public class HasherServiceTests
 {

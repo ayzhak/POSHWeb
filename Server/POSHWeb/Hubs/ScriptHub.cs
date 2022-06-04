@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using POSHWeb.Enum;
 using POSHWeb.Model;
+using POSHWeb.Model.Job;
 
 namespace SignalRChat.Hubs;
 

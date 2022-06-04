@@ -1,4 +1,5 @@
 ﻿using POSHWeb.Model;
+using POSHWeb.Model.Job;
 
 namespace SignalRChat.Hubs;
 
