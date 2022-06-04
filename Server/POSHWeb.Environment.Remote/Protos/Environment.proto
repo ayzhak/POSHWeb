@@ -1,0 +1,150 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "POSHWeb.Environment.Remote.Protos";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
+
+service PSEnvironment {
+	rpc Run(google.protobuf.Empty)
+		returns (RunResponse);
+	rpc Log(LogRequest)
+		returns (google.protobuf.Empty);
+	rpc Prompt(PromptRequest)
+		returns (PromptResponse);
+	rpc InvocationStateChange(InvocationStateChangeRequest) 
+		returns (google.protobuf.Empty);
+}
+
+message ScriptParameters {
+	string Name = 1;
+	google.protobuf.Any Value = 2;
+}
+
+message RunResponse {
+	string Content = 1;
+	repeated ScriptParameters Parameters = 2;
+}
+
+message ProgressEntry {
+	int32 PercentComplete = 1;
+    string Activity = 2;
+    string CurrentOperation = 3;
+    string StatusDescription = 4;
+    int32 SecondsRemaining = 5;
+}
+
+enum Severity {
+	Information = 0;
+    Warning = 1;
+    Error = 2;
+    Verbose = 3;
+    Debug = 4;
+    Progress = 5;
+}
+
+message LogRequest {
+	Severity Severity = 1;
+	string Message = 2;
+	google.protobuf.Timestamp Timestamp = 3;
+	oneof Extra {
+		ProgressEntry Progress = 4;
+		ExceptionEntry Exception = 5;
+	}
+}
+
+message InputPromptRequest {
+	string Name = 1;
+	string Label = 2;
+	string HelpMessage = 3;
+	bool Mandatory = 4;
+	string TypeName = 5;
+	string TypeFullName = 6;
+	string AssemblyFullName = 7;
+	string DefaultValue = 8;
+}
+
+message InputsPromptRequest{
+	repeated InputPromptRequest Inputs = 1;
+}
+
+
+message InputResponse {
+	string Name = 1;
+	string Value = 2;
+}
+
+message InputsResponse {
+	repeated InputResponse Values = 1;
+}
+
+message ChoicePrompt {
+	string HelpMessage = 1;
+	string Label = 2;
+}
+
+message ChoicePromptRequest{
+	int32 DefaultValue = 1;
+	repeated ChoicePrompt Choices = 2;
+}
+message ChoicePromptResponse{
+	int32 Choice = 1;
+}
+
+message CredentialsPromptRequest{
+	string Username = 1;
+	string TargetName = 2;
+}
+message CredentialsPromptResponse{
+	string Username = 1;
+	string Password = 2;
+	string TargetName = 3;
+}
+
+message PromptRequest {
+	string Caption = 1;
+	string Message = 2;
+	oneof Prompts {
+		InputPromptRequest PromptInput = 3;
+		InputsPromptRequest PromptInputs = 4;
+		ChoicePromptRequest PromptChoice = 5;
+		CredentialsPromptRequest  PromptCredentials= 6;
+	}
+}
+
+message PromptResponse {
+	oneof Input {
+		InputResponse PromptInput = 1;
+		InputsResponse PromptInputs = 2;
+		ChoicePromptResponse Choice = 3;
+		CredentialsPromptResponse Credentials = 4;
+	}
+}
+
+enum InvocationState {
+    NotStarted = 0;
+    Running = 1;
+    Stopping = 2;
+    Stopped = 3;
+    Completed = 4;
+    Failed = 5;
+    Disconnected = 6;
+}
+
+
+message ExceptionEntry {
+	string FullName = 1;
+	string Name = 2;
+	string Message = 3;
+	string HelpLink = 4;
+	string StackTrace = 5;
+	string Source = 6;
+	int32 HResult = 7;
+	ExceptionEntry InnerException = 9;
+}
+
+message InvocationStateChangeRequest {
+	InvocationState State = 1;
+	optional ExceptionEntry Reason = 2;
+}
